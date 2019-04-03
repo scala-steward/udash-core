@@ -1,4 +1,5 @@
 import org.openqa.selenium.Capabilities
+import org.openqa.selenium.chrome.ChromeOptions
 import org.openqa.selenium.firefox.FirefoxOptions
 import org.scalajs.jsenv.selenium.SeleniumJSEnv
 
@@ -16,10 +17,8 @@ val CompileAndTest = "test->test;compile->compile"
 val TestAll = "test->test"
 
 // Settings for JS tests run in browser
-val browserCapabilities: Capabilities = {
-  // requires gecko driver, see https://github.com/mozilla/geckodriver
-  new FirefoxOptions().setHeadless(true)
-}
+// requires ChromeDriver: https://sites.google.com/a/chromium.org/chromedriver/
+val browserCapabilities: Capabilities = new ChromeOptions().setHeadless(true).addArguments("--disable-gpu")
 
 val commonSettings = Seq(
   scalaVersion := Dependencies.versionOfScala,
