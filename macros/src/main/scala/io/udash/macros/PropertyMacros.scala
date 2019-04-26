@@ -16,7 +16,6 @@ class PropertyMacros(val ctx: blackbox.Context) extends AbstractMacroCommons(ctx
   val SinglePropertyCreatorCls = tq"$Package.SinglePropertyCreator"
   val PropertyCreatorCompanion = q"$Package.PropertyCreator"
   val ModelPropertyCreatorCls = tq"$Package.ModelPropertyCreator"
-  val MacroModelPropertyCreatorCls = tq"$Package.MacroModelPropertyCreator"
 
   val ReadablePropertyCls = tq"$Package.single.ReadableProperty"
   val CastableReadablePropertyCls = tq"$Package.single.CastableReadableProperty"
@@ -395,14 +394,6 @@ class PropertyMacros(val ctx: blackbox.Context) extends AbstractMacroCommons(ctx
         }
       }
     }"""
-  }
-
-  def reifyMacroModelPropertyCreator[A: c.WeakTypeTag](ev: c.Tree): c.Tree = {
-    q"""
-      new $MacroModelPropertyCreatorCls(
-        ${reifyModelPropertyCreator[A](ev)}
-      )
-    """
   }
 
   def checkModelPropertyTemplate[A: c.WeakTypeTag]: c.Tree = {
